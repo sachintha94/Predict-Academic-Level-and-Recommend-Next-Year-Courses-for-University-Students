@@ -1,0 +1,84 @@
+.table-container {
+  /* display: flex; */
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.courses-section {
+  flex: 1;
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* .courses-section h3 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+} */
+
+.courses-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.courses-list li {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.courses-list li:last-child {
+  border-bottom: none;
+}
+
+.no-courses {
+  color: #666;
+  font-style: italic;
+}
+
+.subject-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 350px 350px; /*repeat(2, 1fr); 2 equal columns */
+  gap: 20px 20px; /* row & column spacing */
+  padding: 0;
+  margin: 20px auto; /* center horizontally */
+  max-width: 700px; /* ⬅️ control the total width of the grid */
+  width: 100%;
+  justify-content: center; /* ✅ centers the grid horizontally */
+}
+
+.subject-list li {
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: #f0f8ff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  word-break: break-word; /* wrap long subject titles */
+}
+
+
+
+.green-text {
+  color: green;
+  font-weight: 600;
+}
+
+.black-text {
+  color: black;
+  font-weight: 600;
+}
+
+.level-display{
+  color: rgb(149, 30, 30);
+}
+
+.table-wrapper h3{
+  width: 424px;
+  color: #1161ee;
+  font-size: 24px;
+  text-align: center;
+}
