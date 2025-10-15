@@ -51,6 +51,9 @@ The `calculate_credits()` function:
 - Once submitted, the data is sent to a Flask API endpoint (`/api/Cal_credit`)
 - The predicted academic level is displayed on the interface
 
+  
+![01](https://github.com/user-attachments/assets/748ed4d2-ba87-46bc-8b66-65ef8f47a13e)
+
 ---
 
 ### **📘 Final Output**
