@@ -98,7 +98,9 @@ Multiple machine learning models were developed and evaluated for **multi-label 
 - 📊 **KNN Multi-Output:** Strong baseline performance  
 - 🧠 **Graph Neural Network (GNN):** ~82.9% accuracy, best at learning subject dependencies
 
-The **GNN model** showed superior capability in understanding course relationships and predicting subject eligibility.
+The **XGBoost + MultiOutputClassifier** showed superior capability in understanding course relationships and predicting subject eligibility.
+
+<img width="1559" height="1080" alt="grph" src="https://github.com/user-attachments/assets/e768bd39-37a9-4571-a5b6-84994a082ce4" />
 
 ### **6. Backend Implementation (Python + Flask):**  
 The `upload()` function:
