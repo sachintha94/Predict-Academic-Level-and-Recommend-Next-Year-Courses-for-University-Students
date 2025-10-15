@@ -61,11 +61,7 @@ The system enables students to check their academic standing by inputting comple
 
 
 ## **TASK 02: Suggestion of the student next year plan using current results**
-
 ---
-
-## **TASK 02: Suggestion of the Student Next Year Plan Using Current Results**
-
 ### **1. Define the Objective:**  
 The system is designed to automatically recommend the subjects a student can register for in the next academic year by analyzing their current academic results from the **MyOUSL result sheet**. It also predicts the student’s current academic level and estimates the remaining time required to complete the degree.
 
@@ -130,7 +126,4 @@ This makes it simple for students to visualize their academic progress and plan 
 
 ### **📘 Final Output**  
 The system uses real academic data to analyze student performance, predict the current academic level, and intelligently recommend future courses. By leveraging advanced ML models such as **XGBoost, Random Forest, and GNN**, along with a **graph-based understanding of subject dependencies**, it delivers personalized, data-driven course suggestions that help students plan their next academic year effectively.
-'@
 
-Set-Content -Path README.md -Value $readme -Encoding UTF8
-Write-Host "README.md created/updated successfully."
