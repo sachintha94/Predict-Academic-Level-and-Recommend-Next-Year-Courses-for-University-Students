@@ -1,0 +1,3 @@
+Start react project - npm start
+Create React Project - npx create-react-app file_name
+start react template shortcut - rfc
