@@ -19,18 +19,24 @@ def load_model_Xgboost(model_path):
     return model
 
 # Load the KNN model
-#model = load_model(r'C:\Users\Sachintha\Desktop\testing11\backend\KNN_model.pkl')
-model = load_model(r'C:\Users\Sachintha\Desktop\testing12\backend\Random_Forest_Model.pkl')
-#model = load_model(r'C:\Users\Sachintha\Desktop\testing11\backend\random_forest_model.joblib')
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_RF_PATH = os.path.join(BASE_DIR, "Random_Forest_Model.pkl")
+MODEL_XGB_PATH = os.path.join(BASE_DIR, "multioutput_Xgboost.pkl")
 
-#C:\Users\Sachintha\Desktop\testing11\backend
+# --- Function to load the pre-trained model ---
+def load_model(model_path):
+    with open(model_path, 'rb') as file:
+        model = pickle.load(file)
+    return model
 
-# Load the pre-trained model
-model_Xgboost = load_model_Xgboost(r'C:\Users\Sachintha\Desktop\testing12\backend\multioutput_Xgboost.pkl')
+# Load the models dynamically from backend folder
+model = load_model(MODEL_RF_PATH)
+model_Xgboost = load_model(MODEL_XGB_PATH)
+FILTERED_DATASET_PATH = os.path.join(BASE_DIR, "filted_dataset.csv")
 
 # Course code csv filtering 
-subject_mapping= pd.read_csv(r'C:\Users\Sachintha\Desktop\testing12\backend\filted_dataset.csv')
+subject_mapping = pd.read_csv(FILTERED_DATASET_PATH)
 subject_name_mapping = dict(zip(subject_mapping['Cou_Code'], subject_mapping['Cou_Title']))
 
 def calculate_credits(course_comp_input, course_elec_input):
@@ -437,77 +443,9 @@ def upload(file_path):
             #"Subjects Suggested for Registration": suggested_subjects,
             "suggested_subjects": [{"Cou_Code": subject, "Cou_Title": subject_name_mapping.get(subject, "Unknown Subject")} for subject in suggested_subjects],
             "message": "File processed successfully"
-        }     
-
-        # return pass_courses, predicted_level, suggested_subjects
-
-
-        # print("Summary Array:", summary_array)
-        #print(f'ghdggdhd:{input_features_2}')   
-
-        # print("Pass Credits by Level:", pass_credit_by_level)
-        # print("Level 3 Credit Pass:", level_3_credit_pass)
-        # print("Level 4 Credit Pass:", level_4_credit_pass)
-        # print("Level 5 Credit Pass:", level_5_credit_pass)
-        # print("Level 6 Credit Pass:", level_6_credit_pass)
-        # print("Level 7 Credit Pass:", level_7_credit_pass)
-        # print("Total Pass Credits:", total_pass_credits)
-        # print("Pass Credits by Level in X Category:", pass_credit_x_by_level)
-        # print("Total Pass Credits in X Category:", total_pass_x_credits)
-        # print("Total Pass Credits for Level 4 and Above:", total_pass_credits_above_level4)
-        # print("Total Pass Credits for Level 3 and 4:", total_pass_credits_level3_and_4)
-        # print("Total Pass Credits for Level 3 and 4 in X Category:", total_pass_credits_level3_and_4_in_x)
-        # print("Total Eligible Credits for Level 3:", total_eligible_credits_level3)
-        # print("Total Eligible Credits for Level 4:", total_eligible_credits_level4)
-        # print("Total Eligible Credits for Level 5:", total_eligible_credits_level5)
-        # print("Total Eligible Credits for Level 5 in X Category:", total_eligible_credits_level5_in_x)
-        # print("Total Pending Credits for Level 5:", total_pending_credits_level5)
-        # print("Encoded Course Status (Reordered):", reordered_course_status)
-        # print("Final Array:", Final_arr)
-        # print(f"Predicted Label: {predicted_label}")
-        # print("Final Array (model_array):", model_array)
-        # print("input feature_2:", input_features_2)
-##########################################################################################################################################
-        # # Return success response with preview
-        # return {
-        #     "message": "File processed successfully",
-        #     "preview": df.head().to_dict(),  # Return a preview of the first few rows
-        #     "pass_courses": pass_courses,
-        #     "Subjects Suggested for Registration": suggested_subjects,
-        #     "eligible_courses": eligible_courses,
-        #     "pending_courses": pending_courses,
-        #     "pass_credit_x_by_level": pass_credit_x_by_level,
-        #     "total_pass_x_credits": total_pass_x_credits,
-        #     "pass_credit_by_level": pass_credit_by_level,
-        #     "level_3_credit_pass": level_3_credit_pass,
-        #     "level_4_credit_pass": level_4_credit_pass,
-        #     "level_5_credit_pass": level_5_credit_pass,
-        #     "level_6_credit_pass": level_6_credit_pass,
-        #     "level_7_credit_pass": level_7_credit_pass,
-        #     "total_pass_credits": total_pass_credits,
-        #     "total_pass_credits_above_level4": total_pass_credits_above_level4,
-        #     "total_pass_credits_level3_and_4": total_pass_credits_level3_and_4,
-        #     "total_pass_credits_level3_and_4_in_x": total_pass_credits_level3_and_4_in_x,
-        #     "total_eligible_credits_level3": total_eligible_credits_level3,
-        #     "total_eligible_credits_level4": total_eligible_credits_level4,
-        #     "total_eligible_credits_level5": total_eligible_credits_level5,
-        #     "total_eligible_credits_level5_in_x": total_eligible_credits_level5_in_x,
-        #     "total_pending_credits_level5": total_pending_credits_level5,
-        #     "encoded_course_status": reordered_course_status,
-        #     "summary_array": summary_array,
-        #     "Final_array":Final_arr,
-        #     "predicted_label": predicted_label,
-        #     "final_Model_array": model_array,
-        #     "Input_feature_2":input_features_2,
-        #     "compulsary_pass": compulsary_pass,
-        #     "elective_pass": elective_pass,
-        #     "credit_features_from_pass": credit_features,
-        #     "invalid_course_codes": invalid_codes,
-        #     "predicted_academic_level": predicted_level,
-        #     "status": 200
-        # }
-
-
+        } 
+    
+    
     except Exception as e:
         print(f"Error occurred during file processing: {str(e)}")
         return {"message": f"An error occurred: {str(e)}", "status": 500}
