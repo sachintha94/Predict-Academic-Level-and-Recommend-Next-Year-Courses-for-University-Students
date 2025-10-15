@@ -31,7 +31,7 @@ A comprehensive augmented dataset was created by expanding real student results 
 ### **4. Model Selection and Training:**
 Multiple machine learning models were developed and evaluated:
 
-- **Random Forest (RF):** 100% accuracy
+- **Random Forest (RF):** 99.9% accuracy
 - **K-Nearest Neighbors (KNN):** 99.97% accuracy
 - **Support Vector Machine (SVM):** 97.97% accuracy
 - **Naive Bayes (NB):** 87.04% accuracy
@@ -60,3 +60,77 @@ The `calculate_credits()` function:
 The system enables students to check their academic standing by inputting completed subjects. It ensures a level is marked as completed only if all compulsory subjects for that level are passed and required credits are achieved. Using an augmented dataset and machine learning models, it provides highly accurate academic level predictions and supports better academic planning.
 
 
+## **TASK 02: Suggestion of the student next year plan using current results**
+
+---
+
+## **TASK 02: Suggestion of the Student Next Year Plan Using Current Results**
+
+### **1. Define the Objective:**  
+The system is designed to automatically recommend the subjects a student can register for in the next academic year by analyzing their current academic results from the **MyOUSL result sheet**. It also predicts the student’s current academic level and estimates the remaining time required to complete the degree.
+
+### **2. Data Input – MyOUSL Results:**  
+Students upload their **MyOUSL results Excel sheet**, which includes:
+
+- 📘 Course Code and Course Name  
+- 📊 Progress Status (*Pass*, *Eligible*, *Pending*, *Resit/Repeat*)  
+- 🏷️ Grade and Attempts  
+- 📅 Last Offered Year  
+
+The system reads this data, validates it, and extracts the necessary columns for further analysis.
+
+### **3. Dataset Preparation and Augmentation:**  
+A **multi-output dataset** was prepared and augmented by generating synthetic records and aligning past results with future enrollment patterns to improve model performance and generalization.
+
+- **65 input features:** Subject performance encoded as `0 = Fail`, `1 = Pass`, `2 = Eligible`, `3 = Pending`, credit totals by category and level, and total accumulated credits.  
+- **54 output features:** Subjects registered by students in the following academic year (`1 = Registered`, `0 = Not Registered`).
+
+### **4. Graph-Based Subject Dependency Representation:**  
+To capture subject prerequisites and their relationships, a **subject requirement graph** was built:
+
+- **Source:** Prerequisite subject  
+- **Target:** Subject eligible for registration  
+- **Weight:** Required status (`1 = Pass`, `2 = Eligible`, `3 = Pending`)
+
+This graph helps the model understand how past performance and prerequisites influence subject eligibility for the next academic year.
+
+### **5. Model Training and Selection:**  
+Multiple machine learning models were developed and evaluated for **multi-label classification**:
+
+- 🌟 **XGBoost + MultiOutputClassifier:** ~89% mean accuracy  
+- 🌟 **Random Forest Multi-Output:** ~89% mean accuracy  
+- 📊 **KNN Multi-Output:** Strong baseline performance  
+- 🧠 **Graph Neural Network (GNN):** ~82.9% accuracy, best at learning subject dependencies
+
+The **GNN model** showed superior capability in understanding course relationships and predicting subject eligibility.
+
+### **6. Backend Implementation (Python + Flask):**  
+The `upload()` function:
+
+- Reads and validates the uploaded Excel sheet  
+- Categorizes courses as compulsory or elective and encodes them numerically  
+- Calculates credit features (e.g., `level_3_credit_pass`, `total_credit_pass`)  
+- Passes data to the trained ML model, which predicts:  
+  - ✅ Student’s current academic level  
+  - 📚 Suggested subjects for the next academic year  
+
+The results are returned as a structured **JSON response**.
+
+### **7. Frontend Development (React):**  
+- Students upload their Excel file through a **user-friendly interface**  
+- A **progress bar** shows upload status  
+- The system displays:  
+  - ✅ **Passed subjects** (in green)  
+  - 📌 **Suggested next-year subjects** (in black)  
+  - 🎓 **Predicted academic level**
+
+This makes it simple for students to visualize their academic progress and plan their next steps.
+
+---
+
+### **📘 Final Output**  
+The system uses real academic data to analyze student performance, predict the current academic level, and intelligently recommend future courses. By leveraging advanced ML models such as **XGBoost, Random Forest, and GNN**, along with a **graph-based understanding of subject dependencies**, it delivers personalized, data-driven course suggestions that help students plan their next academic year effectively.
+'@
+
+Set-Content -Path README.md -Value $readme -Encoding UTF8
+Write-Host "README.md created/updated successfully."
