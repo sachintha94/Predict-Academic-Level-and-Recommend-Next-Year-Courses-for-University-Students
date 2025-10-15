@@ -123,6 +123,7 @@ The results are returned as a structured **JSON response**.
   - 🎓 **Predicted academic level**
 
 This makes it simple for students to visualize their academic progress and plan their next steps.
+![02](https://github.com/user-attachments/assets/5b96d7a5-def9-4396-89a9-ea1835dc6d62)
 
 ---
 
